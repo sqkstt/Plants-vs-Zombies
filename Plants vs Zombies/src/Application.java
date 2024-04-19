@@ -9,7 +9,7 @@ public class Application extends JFrame{
         ImageIcon BackGround = new ImageIcon("resources/src/BG_grass_day.png"); //创建一个图像
         JLabel bg = new JLabel(BackGround);     //创建一个JLabel板
         bg.setBounds(0,20,BackGround.getIconWidth(),BackGround.getIconHeight());    //设置位置大小
-        frame.getLayeredPane().add(bg ,Integer.valueOf(0));  //导入到窗体
+        frame.getLayeredPane().add(bg ,Integer.MIN_VALUE);  //导入到窗体
 
         //创建种子栏
         ImageIcon SeedBank = new ImageIcon("resources/src/SeedBank.png");   //创建一个图像
