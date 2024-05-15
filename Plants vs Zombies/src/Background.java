@@ -7,7 +7,7 @@ public class Background extends JPanel  {
     JLabel bg;
     JLabel seedBank;
     JLabel shovelBank;
-    public Background() {
+    public Background(JLayeredPane layeredPane) {
         this.setSize(1256, 638);
         this.setVisible(true);
         this.setLayout(null);//取消默认布局
@@ -33,6 +33,11 @@ public class Background extends JPanel  {
         shovelBank = new JLabel(ShovelBank);   //创建一个JLabel板
         shovelBank.setBounds(600,20,ShovelBank.getIconWidth(),ShovelBank.getIconHeight());   //设置位置大小
 
+        layeredPane.add(this);
+        layeredPane.setLayer(this, -1);//设置标签为第-1层
+        this.add(shovelBank);
+        this.add(seedBank);
+        this.add(bg);
     }
 
 }
