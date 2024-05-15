@@ -8,7 +8,7 @@ public class MyMenu extends JPanel implements MouseListener {
     JLabel start;
     JLabel Menu;
     //菜单类构造方法
-    public MyMenu() {
+    public MyMenu(JLayeredPane layeredPane) {
         this.setSize(1000, 618);
         this.setVisible(true);
         this.setLayout(null);//取消默认布局
@@ -19,11 +19,16 @@ public class MyMenu extends JPanel implements MouseListener {
         Menu = new JLabel(menu);
         Menu.setBounds(0,0, menu.getIconWidth(),menu.getIconHeight());
 
+
         ImageIcon Start = new ImageIcon("D:\\Lab\\Plants vs Zombies\\resources\\src\\start.png");   //创建一个图像
         Image scaledStart = Start.getImage().getScaledInstance(350, 148, Image.SCALE_SMOOTH);
         Start = new ImageIcon(scaledStart);
         start = new JLabel(Start);
         start.setBounds(530,90,Start.getIconWidth(),Start.getIconHeight());
+        this.add(start);
+        this.add(Menu);
+        layeredPane.add(this);//加入此标签到面板
+        layeredPane.setLayer(this, 0);//设置标签为第0层
     }
 
     @Override
