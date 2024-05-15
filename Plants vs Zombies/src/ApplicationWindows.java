@@ -1,4 +1,3 @@
-import jdk.internal.dynalink.beans.StaticClass;
 import javax.swing.*;
 import java.awt.*;
 
