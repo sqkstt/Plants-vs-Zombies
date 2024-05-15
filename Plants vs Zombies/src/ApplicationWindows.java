@@ -3,10 +3,18 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ApplicationWindows extends JFrame{
+    private static ApplicationWindows applicationWindows;
     private static JFrame ApplicationWindows; //声明一个静态的顶级容器，方便后续调用
-    public ApplicationWindows() {
+    private ApplicationWindows() {
     }
     // 无参构造方法
+
+    public static ApplicationWindows getApplicationWindows(){
+        if (applicationWindows == null) {
+            applicationWindows = new ApplicationWindows();
+        }
+        return applicationWindows;
+    }//单例模式
     public static void main(String[] args) {
         SelectCondition();
     }//程序启动
