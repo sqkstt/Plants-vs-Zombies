@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class Background extends JPanel  {
     JLabel bg;
@@ -12,13 +10,13 @@ public class Background extends JPanel  {
         this.setVisible(true);
         this.setLayout(null);//取消默认布局
         //创建草地
-        ImageIcon BackGround = new ImageIcon("D:\\Lab\\Plants vs Zombies\\resources\\src\\BG_grass_day.png"); //创建一个图像
+        ImageIcon BackGround = new ImageIcon("resources\\src\\BG_grass_day.png"); //创建一个图像
         bg = new JLabel(BackGround);     //创建一个JLabel板
         bg.setBounds(0,20,BackGround.getIconWidth(),BackGround.getIconHeight());    //设置位置大小
 
 
         //创建种子栏
-        ImageIcon SeedBank = new ImageIcon("D:\\Lab\\Plants vs Zombies\\resources\\src\\SeedBank.png");   //创建一个图像
+        ImageIcon SeedBank = new ImageIcon("resources\\src\\SeedBank.png");   //创建一个图像
         Image scaledSeedBank = SeedBank.getImage().getScaledInstance((int)(SeedBank.getIconWidth()/1.2),
                 (int)(SeedBank.getIconHeight()/1.2), Image.SCALE_SMOOTH);
         SeedBank = new ImageIcon(scaledSeedBank);   // 调整种子栏图像大小
@@ -26,7 +24,7 @@ public class Background extends JPanel  {
         seedBank.setBounds(224,20, SeedBank.getIconWidth(),SeedBank.getIconHeight());   //设置位置大小
 
         //创建铲子栏
-        ImageIcon ShovelBank = new ImageIcon("D:\\Lab\\Plants vs Zombies\\resources\\src\\ShovelBank.png");   //创建一个图像
+        ImageIcon ShovelBank = new ImageIcon("resources\\src\\ShovelBank.png");   //创建一个图像
         Image scaledShovelBank = ShovelBank.getImage().getScaledInstance((int)(ShovelBank.getIconWidth()/1.1),
                 (int)(ShovelBank.getIconHeight()/1.1), Image.SCALE_SMOOTH);
         ShovelBank = new ImageIcon(scaledShovelBank);   // 调整种子栏图像大小
@@ -39,5 +37,4 @@ public class Background extends JPanel  {
         this.add(seedBank);
         this.add(bg);
     }
-
 }
