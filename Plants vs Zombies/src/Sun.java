@@ -1,25 +1,33 @@
-
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.Objects;
+import java.util.Timer;
+import java.util.Random;
+import java.util.TimerTask;
 
 public class Sun extends JLabel implements MouseListener {
+    Random rand = new Random();
+    static final int initialX = 200;//默认的阳光初始位置
+    static final int initialY = -150;//默认的阳光初始位置
     int X;
     int Y;
+    int fallingSpeed = 5;//阳光的下落速度
+    int fallingTime;//阳光的下落时间
+    static int SunDisappearTime = 25000;//阳光自然消失时间25s
     JLayeredPane layeredPane;
-    public Sun (int x,int y,JLayeredPane layeredPane){
+    public Sun (JLayeredPane layeredPane){
         this.layeredPane = layeredPane;
-        this.X = x;
-        this.Y = y;
         this.addMouseListener(this);
-        this.setIcon(new ImageIcon("D:\\Lab\\Plants vs Zombies\\resources\\src\\Sun.gif"));
+        this.setIcon(new ImageIcon("resources\\src\\Sun.gif"));
         this.setSize(72,65);
         this.setVisible(true);
+        this.X = rand.nextInt(500) + initialX;
+        this.Y = initialY;
         this.setLocation(X,Y);
         layeredPane.add(this);
-        layeredPane.setLayer(this,4);
+        layeredPane.setLayer(this,4);//设置为第4层
+        fallingTime = rand.nextInt(100) + 40;//产生一个下落时间
+        Disappear(this,this.layeredPane);//阳光自然消失
     }
 
 
@@ -49,4 +57,33 @@ public class Sun extends JLabel implements MouseListener {
     public void mouseExited(MouseEvent e) {
 
     }
+
+    public void Falling(Sun sun) {
+        Timer timer = new Timer(true);
+        TimerTask fall = new TimerTask() {
+            @Override
+            public void run() {
+                if (sun.Y >= fallingTime * fallingSpeed + initialY || sun.Y >= 400) {
+                    cancel();
+                    return;
+                }
+                sun.Y += fallingSpeed;
+                sun.setLocation(sun.X,sun.Y);
+            }
+        };
+        timer.schedule(fall,100,100);
+    }//阳光自动下落
+
+    public void Disappear(Sun sun, JLayeredPane layerPane) {
+        Timer timer = new Timer(true);
+        TimerTask disappear = new TimerTask() {
+            @Override
+            public void run() {
+                layerPane.remove(sun);
+                layeredPane.repaint();
+                cancel();
+            }
+        };
+        timer.schedule(disappear,SunDisappearTime);
+    }//阳光自动消失
 }
