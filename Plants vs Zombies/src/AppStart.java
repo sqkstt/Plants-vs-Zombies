@@ -1,9 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.Menu;
 
 public class AppStart extends JLayeredPane {
-    static ImageIcon imageIcon= new ImageIcon("D:\\Lab\\Plants vs Zombies\\resources\\src\\IconImage.png");// 导入图片;
+    static ImageIcon imageIcon= new ImageIcon("resources\\src\\IconImage.png");// 导入图片;
     static SunLabel sunLabel;
     AppStart() {
         this.setSize(1000,618);
@@ -15,7 +14,7 @@ public class AppStart extends JLayeredPane {
         this.setVisible(true);
         Background background = new Background(this);
         sunLabel = new SunLabel(this);
-        Sun sun = new Sun(200,200,this);
+        sunLabel.SunGenerate(this);//自然阳光生成
     }
     public static SunLabel getSunLabel() {
         return sunLabel;
