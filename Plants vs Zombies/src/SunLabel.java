@@ -1,7 +1,11 @@
 import javax.swing.*;
+import java.util.Timer;
+import java.util.TimerTask;
+
 //太阳面板类
 public class SunLabel extends JLabel {
     int total = 100;//太阳值
+    static int SunGenerateTime = 10000;//阳光生成时间10s
     public SunLabel(JLayeredPane layeredPane) {
         total = 100;
         this.setVisible(true);
@@ -21,4 +25,15 @@ public class SunLabel extends JLabel {
         this.setText(Integer.toString(total));
     }
     //当前太阳值
+    public void SunGenerate(JLayeredPane layerPane) {
+        java.util.Timer sunTimer = new Timer(true);
+        TimerTask generate = new TimerTask() {
+            @Override
+            public void run() {
+                Sun sun = new Sun(layerPane);
+                sun.Falling(sun);
+            }
+        };
+        sunTimer.schedule(generate,0, SunGenerateTime);
+    }
 }
