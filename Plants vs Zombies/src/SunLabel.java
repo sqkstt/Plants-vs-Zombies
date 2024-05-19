@@ -13,7 +13,7 @@ public class SunLabel extends JLabel {
         this.setSize(300, 300);
         this.setLocation(244, -71);
         layeredPane.add(this);//加入此标签到面板
-        layeredPane.setLayer(this, 3);//设置标签为第三层
+        layeredPane.setLayer(this, 4);//设置标签为第四层
     }
     //构造方法
     public int getCurrentSun() {
@@ -25,15 +25,16 @@ public class SunLabel extends JLabel {
         this.setText(Integer.toString(total));
     }
     //当前太阳值
-    public void SunGenerate(JLayeredPane layerPane) {
-        java.util.Timer sunTimer = new Timer(true);
-        TimerTask generate = new TimerTask() {
-            @Override
-            public void run() {
-                Sun sun = new Sun(layerPane);
-                sun.Falling(sun);
-            }
-        };
-        sunTimer.schedule(generate,0, SunGenerateTime);
+    public void SunGenerate(JLayeredPane layerPane,int a) {
+        if (a == 1){
+            Timer sunTimer = new Timer(true);
+            TimerTask generate = new TimerTask() {
+                @Override
+                public void run() {
+                    Sun sun = new Sun(layerPane);
+                }
+            };
+            sunTimer.schedule(generate,0, SunGenerateTime);
+        }
     }
 }
