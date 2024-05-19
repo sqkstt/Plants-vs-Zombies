@@ -1,11 +1,23 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
-public class Background extends JPanel  {
+public class Background extends JPanel implements MouseListener, MouseMotionListener {
     JLabel bg;
     JLabel seedBank;
     JLabel shovelBank;
+    ImageIcon[] imageIcons = {new ImageIcon("resources\\src\\SunFlower.png"),
+            new ImageIcon("resources\\src\\PeaShooter.png"),
+            new ImageIcon("resources\\src\\Nut.png")};
+    JLabel Plant = new JLabel();
+    int X;
+    int Y;
+    JLayeredPane layeredPane;
+    int clicked = 0;
     public Background(JLayeredPane layeredPane) {
+        this.layeredPane = layeredPane;
         this.setSize(1256, 638);
         this.setVisible(true);
         this.setLayout(null);//取消默认布局
@@ -33,8 +45,66 @@ public class Background extends JPanel  {
 
         layeredPane.add(this);
         layeredPane.setLayer(this, -1);//设置标签为第-1层
+        addMouseListener(this);
+        addMouseMotionListener(this);
         this.add(shovelBank);
         this.add(seedBank);
         this.add(bg);
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        X = e.getX();
+        Y = e.getY();
+        if(Y >= 23 & Y <= 87) {
+            for (int i = 0;i < Seed.CardNum;i++) {
+                if(X >= 285+(int)(i*100.0/2.15) & X <= 285+(int)(i*100.0/2.15) + 28) {
+                    Plant.setIcon(AppStart.ChangeImageIcon(imageIcons[i],1.25f,1.25f));
+                    Plant.setLocation(X,Y);
+                    Plant.setSize(56,56);
+                    layeredPane.add(Plant);
+                    layeredPane.setLayer(Plant,3);
+                    clicked = 1;
+                    break;
+                }
+            }
+        } else if (clicked == 1) {
+            layeredPane.remove(Plant);
+            repaint();
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        X = e.getX();
+        Y = e.getY();
+        if (Plant != null) {
+            Plant.setLocation(X,Y);
+        }
     }
 }
