@@ -15,6 +15,7 @@ public class Sun extends JLabel implements MouseListener {
     int fallingTime;//阳光的下落时间
     static int SunDisappearTime = 25000;//阳光自然消失时间25s
     JLayeredPane layeredPane;
+    boolean isRunning = true;
     public Sun (JLayeredPane layeredPane){
         this.layeredPane = layeredPane;
         this.addMouseListener(this);
@@ -27,11 +28,13 @@ public class Sun extends JLabel implements MouseListener {
         layeredPane.add(this);
         layeredPane.setLayer(this,4);//设置为第4层
         fallingTime = rand.nextInt(100) + 40;//产生一个下落时间
+        Falling(this);
         Disappear(this,this.layeredPane);//阳光自然消失
     }
 
 
     public void mouseClicked(MouseEvent e) {
+        isRunning = false;
         layeredPane.remove(this);//点击后移除阳光图片
         AppStart appStart = (AppStart)layeredPane;
         appStart.getSunLabel().addCurrentSun(25);//增加当前阳光值
@@ -63,7 +66,7 @@ public class Sun extends JLabel implements MouseListener {
         TimerTask fall = new TimerTask() {
             @Override
             public void run() {
-                if (sun.Y >= fallingTime * fallingSpeed + initialY || sun.Y >= 400) {
+                if (!isRunning | sun.Y >= fallingTime * fallingSpeed + initialY | sun.Y >= 400) {
                     cancel();
                     return;
                 }
@@ -81,6 +84,7 @@ public class Sun extends JLabel implements MouseListener {
             public void run() {
                 layerPane.remove(sun);
                 layeredPane.repaint();
+                isRunning = false;
                 cancel();
             }
         };
