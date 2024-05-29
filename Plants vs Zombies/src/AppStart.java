@@ -4,7 +4,6 @@ import java.awt.*;
 public class AppStart extends JLayeredPane {
     static ImageIcon imageIcon= new ImageIcon("resources\\src\\IconImage.png");// 导入图片;
     static SunLabel sunLabel;
-
     AppStart() {
         this.setSize(1000,618);
         this.setVisible(true);
@@ -18,11 +17,18 @@ public class AppStart extends JLayeredPane {
         sunLabel.SunGenerate(this,1);//自然阳光生成
 
         Seed seed0 = new Seed(ChangeImageIcon(new ImageIcon("resources\\src\\SunFlowerCard.png"),
-                2f,2.1f), 50,this);
+                2f,2.1f),ChangeImageIcon(new ImageIcon("resources\\src\\SunFlower.png"),
+                1.25f,1.25f), 50,this,"SunFlower",50,300);
         Seed seed1 = new Seed(ChangeImageIcon(new ImageIcon("resources\\src\\PeaShooterCard.png"),
-                2f,2.1f), 100,this);
+                2f,2.1f), ChangeImageIcon(new ImageIcon("resources\\src\\PeaShooter.png"),
+                1.25f,1.25f),100,this,"PeaShooter",100,300);
         Seed seed2 = new Seed(ChangeImageIcon(new ImageIcon("resources\\src\\NutCard.png"),
-                2f,2.1f), 100,this);
+                2f,2.1f),ChangeImageIcon(new ImageIcon("resources\\src\\Nut.png"),
+                1.25f,1.25f),100,this,"Nut",50,4000);
+
+        Seed.add(seed0);
+        Seed.add(seed1);
+        Seed.add(seed2);
     }
 
     public static SunLabel getSunLabel() {
