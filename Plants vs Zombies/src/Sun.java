@@ -20,13 +20,14 @@ public class Sun extends JLabel implements MouseListener {
         this.layeredPane = layeredPane;
         this.addMouseListener(this);
         this.setIcon(new ImageIcon("resources\\src\\Sun.gif"));
+        this.setOpaque(false);//设置边框为透明
         this.setSize(72,65);
         this.setVisible(true);
         this.X = rand.nextInt(500) + initialX;
         this.Y = initialY;
         this.setLocation(X,Y);
         layeredPane.add(this);
-        layeredPane.setLayer(this,4);//设置为第4层
+        layeredPane.setLayer(this,100);//设置为第100层
         fallingTime = rand.nextInt(100) + 40;//产生一个下落时间
         Falling(this);
         Disappear(this,this.layeredPane);//阳光自然消失
