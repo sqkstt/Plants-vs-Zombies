@@ -85,7 +85,7 @@ public class Background extends JPanel implements MouseListener, MouseMotionList
             int count = 0;
             for (int i = 0; i < 5; i++) {
                 for (int j = 0; j < 9; j++) {
-                    if (X >= 230 + j * Width & X <= 230 + (j + 1) * Width & Y >= 92 + i * Height & Y <= 92 + (i + 1) * Height & plant[i][j] == null) {
+                    if (X >= 230 + j * Width & X <= 230 + (j + 1) * Width & Y >= 92 + i * Height & Y <= 92 + (i + 1) * Height & plant[i][j] == null & AppStart.getSunLabel().getCurrentSun() > Seed.Seeds.get(choice).Sun) {
                         plant[i][j] = new Plant(Seed.Seeds.get(choice).HP,X,Y);
                         plant[i][j].setIcon(imageplants[choice]);
                         plant[i][j].setBounds(initX + j * Width, initY + i * Height,(int) (plant[i][j].getIcon().getIconWidth()/1.05),(int)(plant[i][j].getIcon().getIconHeight()/1.05));
