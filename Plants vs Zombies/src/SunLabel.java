@@ -11,7 +11,7 @@ public class SunLabel extends JLabel {
         this.setVisible(true);
         this.setText(Integer.toString(total));//设置初始阳光值
         this.setSize(300, 300);
-        this.setLocation(244, -71);
+        this.setLocation(246, -71);
         layeredPane.add(this);//加入此标签到面板
         layeredPane.setLayer(this, 2);//设置标签为第一百层
     }
