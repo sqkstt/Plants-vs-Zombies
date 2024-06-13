@@ -1,5 +1,10 @@
+import javax.imageio.*;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class AppStart extends JLayeredPane {
     static ImageIcon imageIcon= new ImageIcon("resources\\src\\IconImage.png");// 导入图片;
@@ -29,10 +34,26 @@ public class AppStart extends JLayeredPane {
         Seed.add(seed0);
         Seed.add(seed1);
         Seed.add(seed2);
+
+        ZombieGenerate(this,1);
     }
 
     public static SunLabel getSunLabel() {
         return sunLabel;
+    }
+
+    public static ImageIcon InitialImage(String filename) {
+        BufferedImage bufferedImage = null;
+        ImageIcon imageIcon = null;
+        try {
+            bufferedImage = ImageIO.read(new File(filename));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (bufferedImage != null) {
+            imageIcon = new ImageIcon(bufferedImage);
+        }
+        return imageIcon;
     }
 
     public static ImageIcon ChangeImageIcon(ImageIcon picture, float multiple1,float multiple2) {
@@ -42,5 +63,18 @@ public class AppStart extends JLayeredPane {
             picture = new ImageIcon(scaledPicture);   // 调整图像大小
         }
         return picture;
+    }
+
+    public static void ZombieGenerate(JLayeredPane layerPane,int a) {
+        if (a == 1){
+            Timer zombieTimer = new Timer(true);
+            TimerTask generate = new TimerTask() {
+                @Override
+                public void run() {
+                    Zombie zombie = new Zombie(100,layerPane);
+                }
+            };
+            zombieTimer.schedule(generate,5000,25000);
+        }
     }
 }
